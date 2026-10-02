@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marwan Hesham Tolba | Full Stack MERN Developer & Network Engineer</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                        },
+                        cyan: {
+                            400: '#22d3ee',
+                            500: '#06b6d4',
+                            600: '#0891b2'
+                        },
+                        darkbg: '#0b0f19',
+                        darkcard: '#111827',
+                        darkborder: '#1f2937'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.6);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4f46e5;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #06b6d4;
+        }
+
+        /* Glassmorphism effects */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .dark .glass-panel {
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(31, 41, 55, 0.8);
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .dark .glass-nav {
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(31, 41, 55, 0.8);
+        }
+
+        /* Ambient Glow & Gradients */
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-border {
+            position: relative;
+            border-radius: 1rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(6, 182, 212, 0.3));
+            padding: 1px;
+        }
+
+        .glow-effect {
+            box-shadow: 0 0 25px -5px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Avatar Morphing Border */
+        .avatar-frame {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation: morph 8s ease-in-out infinite;
+            transition: all 1s ease-in-out;
+        }
+        @keyframes morph {
+            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 dark:bg-darkbg text-slate-800 dark:text-slate-100 font-sans transition-colors duration-300 min-h-screen flex flex-col justify-between overflow-x-hidden">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#hero" class="flex items-center space-x-2 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary-600 to-cyan-500 flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-105 transition-transform">
+                        M
+                    </div>
+                    <span class="font-extrabold text-xl tracking-tight text-slate-900 dark:text-white">
+                        Marwan<span class="gradient-text">.dev</span>
+                    </span>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center space-x-8 font-medium text-slate-600 dark:text-slate-300">
+                    <a href="#about" class="hover:text-primary-600 dark:hover:text-cyan-400 transition-colors">About</a>
+                    <a href="#skills" class="hover:text-primary-600 dark:hover:text-cyan-400 transition-colors">Skills</a>
+                    <a href="#experience" class="hover:text-primary-600 dark:hover:text-cyan-400 transition-colors">Experience</a>
+                    <a href="#projects" class="hover:text-primary-600 dark:hover:text-cyan-400 transition-colors">Projects</a>
+                    <a href="#contact" class="hover:text-primary-600 dark:hover:text-cyan-400 transition-colors">Contact</a>
+                </nav>
+
+                <!-- Actions & Mobile Menu Toggle -->
+                <div class="flex items-center space-x-4">
+                    <!-- Theme Toggle Button -->
+                    <button id="themeToggle" class="p-2.5 rounded-xl bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:text-primary-600 dark:hover:text-cyan-400 focus:outline-none transition-all duration-300" aria-label="Toggle Dark Mode">
+                        <i id="themeIcon" class="fa-solid fa-moon text-lg"></i>
+                    </button>
+
+                    <!-- Contact Hire Button -->
+                    <a href="#contact" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm bg-gradient-to-r from-primary-600 to-cyan-500 text-white shadow-md hover:shadow-lg hover:opacity-95 transition-all transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-paper-plane text-xs"></i> Let's Talk
+                    </a>
+
+                    <!-- Hamburger Button -->
+                    <button id="mobileMenuBtn" class="md:hidden p-2.5 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-200/60 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle Menu">
+                        <i id="mobileMenuIcon" class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="hidden md:hidden border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-darkbg/95 px-4 pt-2 pb-6 space-y-3 transition-all">
+            <a href="#about" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-800 hover:text-primary-600 dark:hover:text-cyan-400">About</a>
+            <a href="#skills" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-800 hover:text-primary-600 dark:hover:text-cyan-400">Skills</a>
+            <a href="#experience" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-800 hover:text-primary-600 dark:hover:text-cyan-400">Experience</a>
+            <a href="#projects" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-800 hover:text-primary-600 dark:hover:text-cyan-400">Projects</a>
+            <a href="#contact" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-800 hover:text-primary-600 dark:hover:text-cyan-400">Contact</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+        <!-- Background Ambient Glow Shapes -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary-500/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/3 right-10 w-72 h-72 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                
+                <!-- Left Text Column -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <!-- Status Badge -->
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm border border-slate-200 dark:border-slate-800">
+                        <span class="relative flex h-2.5 w-2.5">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                        </span>
+                        <span>Open for Hire & Freelancing</span>
+                        <span class="text-slate-400">|</span>
+                        <span class="text-slate-500 dark:text-slate-400"><i class="fa-solid fa-location-dot text-rose-500 mr-1"></i>Cairo, Egypt</span>
+                    </div>
+
+                    <!-- Main Name & Title -->
+                    <div class="space-y-3">
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-none">
+                            Marwan Hesham <span class="gradient-text">Tolba</span>
+                        </h1>
+                        <h2 class="text-xl sm:text-2xl font-bold text-primary-600 dark:text-cyan-400 font-mono">
+                            &lt; Full Stack MERN Developer & Network Engineer /&gt;
+                        </h2>
+                    </div>
+
+                    <!-- Headline Tagline -->
+                    <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
+                        "Translating Visionary Ideas Into Seamless, Functional & Responsive Digital Realities."
+                    </p>
+
+                    <!-- Quick Action Buttons -->
+                    <div class="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4">
+                        <a href="#projects" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-primary-600 to-cyan-500 text-white font-semibold text-sm shadow-lg hover:shadow-cyan-500/25 transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                            <i class="fa-solid fa-code-branch"></i> Explore Projects
+                        </a>
+                        <a href="https://www.linkedin.com/in/marwan-hesham-tolba-el-sayed-b28b2a3b7/" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-xl glass-panel text-slate-800 dark:text-slate-100 hover:text-primary-600 dark:hover:text-cyan-400 font-semibold text-sm transition-all transform hover:-translate-y-0.5 flex items-center gap-2 border border-slate-200 dark:border-slate-800">
+                            <i class="fa-brands fa-linkedin text-lg text-blue-500"></i> LinkedIn Profile
+                        </a>
+                        <a href="#contact" class="px-6 py-3.5 rounded-xl border border-slate-300 dark:border-slate-700 hover:border-primary-500 dark:hover:border-cyan-400 text-slate-700 dark:text-slate-200 font-semibold text-sm transition-all flex items-center gap-2">
+                            <i class="fa-regular fa-envelope"></i> Contact Me
+                        </a>
+                    </div>
+
+                    <!-- Social Media Links -->
+                    <div class="pt-4 flex items-center justify-center lg:justify-start space-x-4">
+                        <span class="text-xs uppercase tracking-wider text-slate-400 font-bold">Connect:</span>
+                        <a href="https://github.com/Marwan-Hesham-cs" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-lg glass-panel flex items-center justify-center text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-cyan-400 hover:scale-110 transition-all" aria-label="GitHub">
+                            <i class="fa-brands fa-github text-xl"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/marwan-hesham-tolba-el-sayed-b28b2a3b7/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-lg glass-panel flex items-center justify-center text-slate-700 dark:text-slate-300 hover:text-blue-500 hover:scale-110 transition-all" aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin-in text-xl"></i>
+                        </a>
+                        <a href="mailto:mh2841@fayoum.edu.eg" class="w-10 h-10 rounded-lg glass-panel flex items-center justify-center text-slate-700 dark:text-slate-300 hover:text-rose-500 hover:scale-110 transition-all" aria-label="Email">
+                            <i class="fa-solid fa-envelope text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Profile Photo Frame -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
+                        <!-- Glow Aura -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-primary-600 to-cyan-400 rounded-full blur-2xl opacity-40 animate-pulse"></div>
+                        
+                        <!-- Profile Image Container with Morphing Border -->
+                        <div class="relative w-full h-full p-2 bg-gradient-to-tr from-primary-600 via-indigo-500 to-cyan-400 avatar-frame glow-effect shadow-2xl flex items-center justify-center overflow-hidden">
+                            <img id="profileImage" 
+                                 src="D S C _ 0 6 9 4.jpg.jpeg" 
+                                 alt="Marwan Hesham Tolba" 
+                                 class="w-full h-full object-cover rounded-3xl transition-transform duration-500 hover:scale-105"
+                                 onerror="handleProfileImageError(this)">
+                        </div>
+
+                        <!-- Badge Overlay -->
+                        <div class="absolute -bottom-2 -left-2 glass-panel p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-500 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 font-medium">Education</p>
+                                <p class="text-sm font-bold text-slate-800 dark:text-white">CS Faculty (2+ Yrs)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT ME SECTION -->
+    <section id="about" class="py-20 bg-slate-100/60 dark:bg-slate-900/40 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Title -->
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
+                    About <span class="gradient-text">Me</span>
+                </h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-primary-600 to-cyan-400 mx-auto rounded-full"></div>
+                <p class="text-slate-600 dark:text-slate-400 text-base sm:text-lg">
+                    Passionate Computer Science student dedicated to crafting end-to-end digital experiences.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- About Story Column -->
+                <div class="lg:col-span-7 glass-panel p-8 rounded-3xl shadow-sm flex flex-col justify-between space-y-6">
+                    <div class="space-y-4 text-slate-700 dark:text-slate-300 leading-relaxed">
+                        <p class="text-lg font-medium text-slate-900 dark:text-white">
+                            I am a Computer Science student with a deep passion for bringing conceptual visions into fully functional, high-performance web applications and robust network architectures.
+                        </p>
+                        <p>
+                            With 2+ years of rigorous study in the CS Faculty, I have forged a solid foundation in computer science fundamentals—including <strong>C++, Object-Oriented Programming, System Design (SDLC), Data Structures, and Computer Networks</strong>.
+                        </p>
+                        <p>
+                            Whether building interconnected enterprise hotel network topologies using Cisco Packet Tracer or engineering modern full-stack MERN web applications, my ultimate goal is to craft tools that simplify workflows and create lasting impact.
+                        </p>
+                    </div>
+
+                    <!-- Highlight Badges -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+                        <div class="p-4 rounded-2xl bg-white/60 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 text-center">
+                            <span class="block text-2xl font-extrabold gradient-text">2+ Years</span>
+                            <span class="text-xs text-slate-500 dark:text-slate-400 font-semibold">CS Foundations</span>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-white/60 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 text-center">
+                            <span class="block text-2xl font-extrabold gradient-text">100%</span>
+                            <span class="text-xs text-slate-500 dark:text-slate-400 font-semibold">Team Satisfaction</span>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-white/60 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 text-center">
+                            <span class="block text-2xl font-extrabold gradient-text">MERN + CCNA</span>
+                            <span class="text-xs text-slate-500 dark:text-slate-400 font-semibold">Core Expertise</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strengths & Soft Skills Side Column -->
+                <div class="lg:col-span-5 space-y-6 flex flex-col justify-between">
+                    <!-- Team Game Changer Card -->
+                    <div class="glass-panel p-6 rounded-3xl border-l-4 border-l-primary-500 space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-xl bg-primary-500/10 text-primary-600 dark:text-primary-400 flex items-center justify-center text-lg font-bold">
+                                <i class="fa-solid fa-users-gear"></i>
+                            </div>
+                            <h3 class="font-bold text-lg text-slate-900 dark:text-white">The Team Game Changer</h3>
+                        </div>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                            I thrive both as an active team contributor and as a decisive project leader. Across academic and practical projects, I ensure every member aligns with the goal, resulting in consistent 100% team satisfaction and timely delivery.
+                        </p>
+                    </div>
+
+                    <!-- Soft Skills & Frontline Service Card -->
+                    <div class="glass-panel p-6 rounded-3xl border-l-4 border-l-cyan-500 space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center text-lg font-bold">
+                                <i class="fa-solid fa-comments"></i>
+                            </div>
+                            <h3 class="font-bold text-lg text-slate-900 dark:text-white">Frontline Soft Skills</h3>
+                        </div>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                            My prior hands-on hospitality experience engaging directly with individuals from all community layers enhanced my empathy, active listening, stress management, and clear interpersonal communication.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
+                    Technical <span class="gradient-text">Skills</span>
+                </h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-primary-600 to-cyan-400 mx-auto rounded-full"></div>
+                <p class="text-slate-600 dark:text-slate-400 text-base sm:text-lg">
+                    A comprehensive stack spanning full-stack web engineering, software engineering, and computer networking.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Skill Category 1: MERN Stack -->
+                <div class="glass-panel p-6 rounded-2xl hover:border-primary-500/50 transition-all duration-300 group space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-react"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white">MERN Stack</h3>
+                    </div>
+                    <ul class="space-y-2.5 text-sm text-slate-600 dark:text-slate-300">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500 text-xs"></i> MongoDB & Mongoose</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500 text-xs"></i> Express.js Framework</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500 text-xs"></i> React.js & Hooks</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500 text-xs"></i> Node.js Runtime</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500 text-xs"></i> JavaScript (ES6+) / TypeScript</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500 text-xs"></i> RESTful API Architecture</li>
+                    </ul>
+                </div>
+
+                <!-- Skill Category 2: CS & Programming -->
+                <div class="glass-panel p-6 rounded-2xl hover:border-primary-500/50 transition-all duration-300 group space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 rounded-xl bg-primary-500/10 text-primary-500 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white">CS & Core Code</h3>
+                    </div>
+                    <ul class="space-y-2.5 text-sm text-slate-600 dark:text-slate-300">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-primary-500 text-xs"></i> C++ Core Fundamentals</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-primary-500 text-xs"></i> Data Structures & Algorithms</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-primary-500 text-xs"></i> Object-Oriented Programming (OOP)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-primary-500 text-xs"></i> System Design Fundamentals</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-primary-500 text-xs"></i> SDLC Lifecycle Management</li>
+                    </ul>
+                </div>
+
+                <!-- Skill Category 3: Networking & Infrastructure -->
+                <div class="glass-panel p-6 rounded-2xl hover:border-cyan-500/50 transition-all duration-300 group space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-500 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-network-wired"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white">Networks & CCNA</h3>
+                    </div>
+                    <ul class="space-y-2.5 text-sm text-slate-600 dark:text-slate-300">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-500 text-xs"></i> CCNA Certified Training</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-500 text-xs"></i> Network Topology Design</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-500 text-xs"></i> Department Interconnection</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-500 text-xs"></i> Cisco Packet Tracer</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-500 text-xs"></i> TCP/IP, Subnetting & Routing</li>
+                    </ul>
+                </div>
+
+                <!-- Skill Category 4: Soft Skills & Tools -->
+                <div class="glass-panel p-6 rounded-2xl hover:border-amber-500/50 transition-all duration-300 group space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-people-group"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white">Leadership & Tools</h3>
+                    </div>
+                    <ul class="space-y-2.5 text-sm text-slate-600 dark:text-slate-300">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-500 text-xs"></i> Team Leadership & Mentorship</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-500 text-xs"></i> Interpersonal Communication</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-500 text-xs"></i> Git & GitHub Version Control</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-500 text-xs"></i> Problem Solving under pressure</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-500 text-xs"></i> Agile & Sprint Collaboration</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE & LEADERSHIP SECTION -->
+    <section id="experience" class="py-20 bg-slate-100/60 dark:bg-slate-900/40 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
+                    Experience & <span class="gradient-text">Leadership</span>
+                </h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-primary-600 to-cyan-400 mx-auto rounded-full"></div>
+                <p class="text-slate-600 dark:text-slate-400 text-base sm:text-lg">
+                    Academic initiatives, intensive technical training, and real-world soft skill foundations.
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto space-y-8 relative before:absolute before:inset-0 before:left-8 md:before:left-1/2 before:-translate-x-1/2 before:w-0.5 before:bg-slate-300 dark:before:bg-slate-800">
+                
+                <!-- Timeline Item 1 -->
+                <div class="relative flex flex-col md:flex-row items-center group">
+                    <div class="flex items-center justify-start w-full md:w-1/2 md:pr-10 md:text-right order-2 md:order-1 pl-16 md:pl-0">
+                        <div class="glass-panel p-6 rounded-2xl w-full border border-slate-200 dark:border-slate-800 shadow-sm group-hover:border-primary-500 transition-colors">
+                            <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-primary-500/10 text-primary-600 dark:text-cyan-400 mb-2">2024 - Present</span>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">Academic Project Leader & Developer</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 font-medium mb-3">CS Faculty Academic Teams</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                                Steered cross-functional student teams in designing software and network architectures. Took full responsibility for translating raw requirements into clear technical blueprints while maintaining high team morale.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Icon Bubble -->
+                    <div class="absolute left-8 md:left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-gradient-to-tr from-primary-600 to-cyan-500 text-white flex items-center justify-center font-bold shadow-lg z-10 order-1">
+                        <i class="fa-solid fa-user-ninja text-sm"></i>
+                    </div>
+                    <div class="w-full md:w-1/2 order-3"></div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="relative flex flex-col md:flex-row items-center group">
+                    <div class="w-full md:w-1/2 order-3 md:order-1"></div>
+                    <!-- Icon Bubble -->
+                    <div class="absolute left-8 md:left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-gradient-to-tr from-cyan-500 to-emerald-500 text-white flex items-center justify-center font-bold shadow-lg z-10 order-1">
+                        <i class="fa-solid fa-network-wired text-sm"></i>
+                    </div>
+                    <div class="flex items-center justify-start w-full md:w-1/2 md:pl-10 order-2 md:order-2 pl-16 md:pl-10">
+                        <div class="glass-panel p-6 rounded-2xl w-full border border-slate-200 dark:border-slate-800 shadow-sm group-hover:border-cyan-500 transition-colors">
+                            <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 mb-2">2025 - 2026</span>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">CCNA Network Trainee</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 font-medium mb-3">NTI (National Telecommunication Institute)</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                                Completed intensive practical training on networking fundamentals, routing & switching, VLAN configuration, and enterprise-wide multi-department network simulations.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div class="relative flex flex-col md:flex-row items-center group">
+                    <div class="flex items-center justify-start w-full md:w-1/2 md:pr-10 md:text-right order-2 md:order-1 pl-16 md:pl-0">
+                        <div class="glass-panel p-6 rounded-2xl w-full border border-slate-200 dark:border-slate-800 shadow-sm group-hover:border-amber-500 transition-colors">
+                            <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 mb-2">Previous Roles</span>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">Frontline Service Specialist</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 font-medium mb-3">Hospitality Services</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                                Developed crucial real-world interpersonal communication skills by interacting with diverse customers daily. Built adaptability, active listening, and high-stress problem-solving abilities.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Icon Bubble -->
+                    <div class="absolute left-8 md:left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-gradient-to-tr from-amber-500 to-rose-500 text-white flex items-center justify-center font-bold shadow-lg z-10 order-1">
+                        <i class="fa-solid fa-hands-holding-child text-sm"></i>
+                    </div>
+                    <div class="w-full md:w-1/2 order-3"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
+                    Featured <span class="gradient-text">Projects</span>
+                </h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-primary-600 to-cyan-400 mx-auto rounded-full"></div>
+                <p class="text-slate-600 dark:text-slate-400 text-base sm:text-lg">
+                    Real-world solutions translating complex requirements into simple, functional platforms.
+                </p>
+            </div>
+
+            <!-- Filter Category Buttons -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button class="project-filter-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 bg-primary-600 text-white shadow-md" data-filter="all">
+                    All Projects
+                </button>
+                <button class="project-filter-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 glass-panel text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-cyan-400" data-filter="networking">
+                    Networking
+                </button>
+                <button class="project-filter-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 glass-panel text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-cyan-400" data-filter="systems">
+                    Systems
+                </button>
+                <button class="project-filter-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 glass-panel text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-cyan-400" data-filter="web">
+                    Web Apps
+                </button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project Card 1: Hotels Network System -->
+                <div class="project-card glass-panel rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between" data-category="networking">
+                    <div>
+                        <!-- Header Preview Box -->
+                        <div class="h-48 bg-gradient-to-br from-slate-900 via-slate-800 to-cyan-950 p-6 flex flex-col justify-between relative overflow-hidden group">
+                            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-cyan-500/20 rounded-full blur-2xl group-hover:scale-150 transition-transform"></div>
+                            <div class="flex justify-between items-start">
+                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
+                                    Networking
+                                </span>
+                                <span class="text-xs text-slate-400 font-mono">2026</span>
+                            </div>
+                            <div class="space-y-1">
+                                <i class="fa-solid fa-hotel text-3xl text-cyan-400 mb-2"></i>
+                                <h3 class="text-xl font-extrabold text-white">Hotels Network System</h3>
+                            </div>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-6 space-y-4">
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                                Built an interconnected multi-department hotel network connecting guest management, administration, and secure server infrastructure applying advanced CCNA principles.
+                            </p>
+                            
+                            <!-- Tech Badges -->
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300">CCNA</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Cisco Packet Tracer</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Topologies</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Footer Links -->
+                    <div class="p-6 pt-0 border-t border-slate-100 dark:border-slate-800/60 mt-4 flex items-center justify-between">
+                        <a href="https://github.com/Marwan-Hesham-cs/CCNA_NTI_Project" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-primary-600 dark:text-cyan-400 hover:underline inline-flex items-center gap-1.5 pt-4">
+                            <i class="fa-brands fa-github text-base"></i> View Repository
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project Card 2: Hospital Management System -->
+                <div class="project-card glass-panel rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between" data-category="systems web">
+                    <div>
+                        <!-- Header Preview Box -->
+                        <div class="h-48 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 p-6 flex flex-col justify-between relative overflow-hidden group">
+                            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-primary-500/20 rounded-full blur-2xl group-hover:scale-150 transition-transform"></div>
+                            <div class="flex justify-between items-start">
+                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-primary-500/20 text-primary-400 border border-primary-500/30">
+                                    Systems & Web
+                                </span>
+                                <span class="text-xs text-slate-400 font-mono">2025</span>
+                            </div>
+                            <div class="space-y-1">
+                                <i class="fa-solid fa-hospital-user text-3xl text-primary-400 mb-2"></i>
+                                <h3 class="text-xl font-extrabold text-white">Hospital Management System</h3>
+                            </div>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-6 space-y-4">
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                                Complete system covering end-to-end operational needs for hospitals—managing patients, doctors, medical records, and financial workflows designed through full SDLC practices.
+                            </p>
+                            
+                            <!-- Tech Badges -->
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300">System Design</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300">SDLC</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Database</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Footer Links -->
+                    <div class="p-6 pt-0 border-t border-slate-100 dark:border-slate-800/60 mt-4 flex items-center justify-between">
+                        <a href="https://drive.google.com/file/d/1P7eUKRSbThHfl7wrB49Q4FnR1NlEdYqO/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-primary-600 dark:text-cyan-400 hover:underline inline-flex items-center gap-1.5 pt-4">
+                            <i class="fa-solid fa-file-pdf text-base text-rose-500"></i> View Project File
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project Card 3: MERN Stack E-Platform Showcase -->
+                <div class="project-card glass-panel rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between" data-category="web">
+                    <div>
+                        <!-- Header Preview Box -->
+                        <div class="h-48 bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-900 p-6 flex flex-col justify-between relative overflow-hidden group">
+                            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-emerald-500/20 rounded-full blur-2xl group-hover:scale-150 transition-transform"></div>
+                            <div class="flex justify-between items-start">
+                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                                    Web App
+                                </span>
+                                <span class="text-xs text-slate-400 font-mono">MERN</span>
+                            </div>
+                            <div class="space-y-1">
+                                <i class="fa-solid fa-layer-group text-3xl text-emerald-400 mb-2"></i>
+                                <h3 class="text-xl font-extrabold text-white">MERN Web Application Platform</h3>
+                            </div>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-6 space-y-4">
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                                Full-stack web application incorporating modern React component state management, Express REST API controllers, Node.js logic, and MongoDB database storage.
+                            </p>
+                            
+                            <!-- Tech Badges -->
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300">React.js</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Node / Express</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300">MongoDB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Footer Links -->
+                    <div class="p-6 pt-0 border-t border-slate-100 dark:border-slate-800/60 mt-4 flex items-center justify-between">
+                        <a href="https://github.com/Marwan-Hesham-cs" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-primary-600 dark:text-cyan-400 hover:underline inline-flex items-center gap-1.5 pt-4">
+                            <i class="fa-brands fa-github text-base"></i> View GitHub Profile
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-20 bg-slate-100/60 dark:bg-slate-900/40 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
+                    Get In <span class="gradient-text">Touch</span>
+                </h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-primary-600 to-cyan-400 mx-auto rounded-full"></div>
+                <p class="text-slate-600 dark:text-slate-400 text-base sm:text-lg">
+                    Have a project in mind, a hiring opportunity, or want to connect? Let's talk!
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Direct Contact Details -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="glass-panel p-6 rounded-3xl space-y-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Contact Information</h3>
+                        
+                        <!-- Email Card -->
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-2xl bg-rose-500/10 text-rose-500 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 font-semibold uppercase">Email Address</p>
+                                <a href="mailto:mh2841@fayoum.edu.eg" class="text-base font-bold text-slate-800 dark:text-slate-200 hover:text-primary-600 dark:hover:text-cyan-400 transition-colors">
+                                    mh2841@fayoum.edu.eg
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Location Card -->
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-2xl bg-primary-500/10 text-primary-500 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 font-semibold uppercase">Location</p>
+                                <p class="text-base font-bold text-slate-800 dark:text-slate-200">
+                                    Cairo, Egypt 📍
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- GitHub Card -->
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-2xl bg-slate-800 text-white flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-brands fa-github"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 font-semibold uppercase">GitHub Profile</p>
+                                <a href="https://github.com/Marwan-Hesham-cs" target="_blank" rel="noopener noreferrer" class="text-base font-bold text-slate-800 dark:text-slate-200 hover:text-cyan-400 transition-colors">
+                                    github.com/Marwan-Hesham-cs
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- LinkedIn Card -->
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-2xl bg-blue-600/10 text-blue-600 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-brands fa-linkedin-in"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 font-semibold uppercase">LinkedIn Profile</p>
+                                <a href="https://www.linkedin.com/in/marwan-hesham-tolba-el-sayed-b28b2a3b7/" target="_blank" rel="noopener noreferrer" class="text-base font-bold text-slate-800 dark:text-slate-200 hover:text-blue-500 transition-colors">
+                                    Marwan Hesham Tolba
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:col-span-7">
+                    <form id="contactForm" class="glass-panel p-8 rounded-3xl space-y-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Send Me a Message</h3>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="formName" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Your Name</label>
+                                <input type="text" id="formName" required placeholder="e.g. John Doe" class="w-full px-4 py-3 rounded-xl bg-white/80 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:outline-none transition-all">
+                            </div>
+                            <div>
+                                <label for="formEmail" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Your Email</label>
+                                <input type="email" id="formEmail" required placeholder="e.g. john@example.com" class="w-full px-4 py-3 rounded-xl bg-white/80 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:outline-none transition-all">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="formSubject" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Subject</label>
+                            <input type="text" id="formSubject" required placeholder="e.g. Project Inquiry / Freelance Opportunity" class="w-full px-4 py-3 rounded-xl bg-white/80 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:outline-none transition-all">
+                        </div>
+
+                        <div>
+                            <label for="formMessage" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Message</label>
+                            <textarea id="formMessage" rows="4" required placeholder="Write your message here..." class="w-full px-4 py-3 rounded-xl bg-white/80 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:outline-none transition-all resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-primary-600 to-cyan-500 text-white font-bold text-base shadow-lg hover:shadow-cyan-500/25 transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Send Message
+                        </button>
+
+                        <div id="formSuccessAlert" class="hidden p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-sm font-semibold text-center">
+                            <i class="fa-solid fa-circle-check mr-2"></i> Thank you! Your message has been sent successfully. I will get back to you shortly.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-8 border-t border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-darkbg/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p class="text-sm text-slate-500 dark:text-slate-400 text-center sm:text-left">
+                &copy; <span id="currentYear"></span> Marwan Hesham Tolba. Built with passion & precision.
+            </p>
+
+            <div class="flex items-center space-x-4">
+                <a href="https://github.com/Marwan-Hesham-cs" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-primary-600 dark:hover:text-cyan-400 transition-colors">
+                    <i class="fa-brands fa-github text-lg"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/marwan-hesham-tolba-el-sayed-b28b2a3b7/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-blue-500 transition-colors">
+                    <i class="fa-brands fa-linkedin-in text-lg"></i>
+                </a>
+                <a href="mailto:mh2841@fayoum.edu.eg" class="text-slate-400 hover:text-rose-500 transition-colors">
+                    <i class="fa-solid fa-envelope text-lg"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Dynamic Copyright Year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const htmlElement = document.documentElement;
+
+        // Check stored theme or default to dark
+        const savedTheme = localStorage.getItem('marwan_portfolio_theme') || 'dark';
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                themeIcon.className = 'fa-solid fa-sun text-lg text-amber-400';
+            } else {
+                htmlElement.classList.remove('dark');
+                themeIcon.className = 'fa-solid fa-moon text-lg text-slate-700';
+            }
+            localStorage.setItem('marwan_portfolio_theme', theme);
+        }
+
+        applyTheme(savedTheme);
+
+        themeToggleBtn.addEventListener('click', () => {
+            const isDark = htmlElement.classList.contains('dark');
+            applyTheme(isDark ? 'light' : 'dark');
+        });
+
+        // Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenuIcon = document.getElementById('mobileMenuIcon');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            mobileMenuIcon.className = isOpen ? 'fa-solid fa-xmark text-xl' : 'fa-solid fa-bars text-xl';
+        });
+
+        // Close mobile menu when clicking nav links
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuIcon.className = 'fa-solid fa-bars text-xl';
+            });
+        });
+
+        // Project Category Filter Tabs
+        const filterBtns = document.querySelectorAll('.project-filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Style Active Button
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-primary-600', 'text-white', 'shadow-md');
+                    b.classList.add('glass-panel', 'text-slate-700', 'dark:text-slate-300');
+                });
+
+                btn.classList.remove('glass-panel', 'text-slate-700', 'dark:text-slate-300');
+                btn.classList.add('bg-primary-600', 'text-white', 'shadow-md');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    const categories = card.getAttribute('data-category');
+                    if (filterValue === 'all' || categories.includes(filterValue)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Profile Image Error Fallback (in case drive link blocks direct load)
+        function handleProfileImageError(img) {
+            img.onerror = null;
+            // High quality standard developer avatar SVG fallback
+            img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%236366f1"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm0 14c-2.03 0-3.8-1.04-4.83-2.61.03-1.6 3.22-2.48 4.83-2.48s4.8 1.88 4.83 2.48C15.8 18.96 14.03 20 12 20z"/></svg>';
+        }
+
+        // Contact Form Handling
+        const contactForm = document.getElementById('contactForm');
+        const formSuccessAlert = document.getElementById('formSuccessAlert');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            formSuccessAlert.classList.remove('hidden');
+            contactForm.reset();
+
+            setTimeout(() => {
+                formSuccessAlert.classList.add('hidden');
+            }, 6000);
+        });
+    </script>
+</body>
+</html>
